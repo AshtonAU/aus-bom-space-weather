@@ -1,0 +1,27 @@
+{
+  "name": "aus-bom-space-weather",
+  "version": "0.1.0",
+  "description": "Australian Bureau of Meteorology Space Weather integration and Lovelace card for Home Assistant",
+  "main": "custom_components/aus_bom_space_weather/www/aus-bom-space-weather-card.js",
+  "scripts": {
+    "build": "rollup -c",
+    "dev": "rollup -c -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AshtonAU/aus-bom-space-weather"
+  },
+  "keywords": [
+    "home-assistant",
+    "lovelace",
+    "bom",
+    "space-weather",
+    "aurora",
+    "australia"
+  ],
+  "author": "Ashton Turner",
+  "license": "MIT",
+  "devDependencies": {
+    "rollup": "^4.0.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "AUS BOM Space Weather",
+  "render_readme": true,
+  "country": "AU",
+  "homeassistant": "2024.6.0",
+  "domains": ["sensor", "binary_sensor", "button", "select"]
+}

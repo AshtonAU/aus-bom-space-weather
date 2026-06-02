@@ -1,0 +1,135 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "AUS BOM Space Weather",
+        "description": "Connect to the Bureau of Meteorology Space Weather Services API.",
+        "data": {
+          "api_key": "BOM SWS API key",
+          "k_index_location": "K index location"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Reconnect AUS BOM Space Weather",
+        "description": "Enter a replacement BOM SWS API key.",
+        "data": {
+          "api_key": "BOM SWS API key"
+        }
+      }
+    },
+    "error": {
+      "already_configured": "That K index location is already configured.",
+      "cannot_connect": "Could not connect to BOM Space Weather Services.",
+      "invalid_auth": "The BOM SWS API key was rejected.",
+      "not_permitted": "The BOM SWS API key is not permitted to access the required data.",
+      "unknown": "Unexpected error."
+    },
+    "abort": {
+      "already_configured": "AUS BOM Space Weather is already configured.",
+      "reauth_entry_missing": "Could not find the integration entry to reconnect."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "AUS BOM Space Weather options",
+        "data": {
+          "k_index_location": "K index location",
+          "update_interval": "Update interval in minutes",
+          "stale_after_minutes": "Stale threshold in minutes"
+        }
+      }
+    },
+    "error": {
+      "already_configured": "That K index location is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "a_index": {
+        "name": "A index"
+      },
+      "k_index": {
+        "name": "K index"
+      },
+      "dst_index": {
+        "name": "Dst index"
+      },
+      "geomagnetic_activity": {
+        "name": "Geomagnetic activity"
+      },
+      "condition": {
+        "name": "Condition"
+      },
+      "severity_level": {
+        "name": "Severity level"
+      },
+      "aurora_notice": {
+        "name": "Aurora notice"
+      },
+      "aurora_visibility": {
+        "name": "Aurora visibility"
+      },
+      "aurora_k_aus": {
+        "name": "Aurora K-Aus"
+      },
+      "aurora_latitude_band": {
+        "name": "Aurora latitude band"
+      },
+      "magnetic_storm_scale": {
+        "name": "Magnetic storm scale"
+      },
+      "active_alert_count": {
+        "name": "Active alert count"
+      },
+      "api_error_count": {
+        "name": "API error count"
+      },
+      "endpoint_status": {
+        "name": "Endpoint status"
+      },
+      "data_age": {
+        "name": "Data age"
+      },
+      "data_health": {
+        "name": "Data health"
+      }
+    },
+    "binary_sensor": {
+      "magnetic_alert": {
+        "name": "Magnetic alert"
+      },
+      "magnetic_warning": {
+        "name": "Magnetic warning"
+      },
+      "aurora_alert": {
+        "name": "Aurora alert"
+      },
+      "aurora_watch": {
+        "name": "Aurora watch"
+      },
+      "aurora_outlook": {
+        "name": "Aurora outlook"
+      },
+      "aurora_possible": {
+        "name": "Aurora possible"
+      },
+      "geomagnetic_storm": {
+        "name": "Geomagnetic storm"
+      },
+      "data_stale": {
+        "name": "Data stale"
+      }
+    },
+    "button": {
+      "refresh": {
+        "name": "Refresh"
+      }
+    },
+    "select": {
+      "k_index_location": {
+        "name": "K index location"
+      }
+    }
+  }
+}

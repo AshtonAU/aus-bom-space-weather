@@ -1,0 +1,10 @@
+refresh:
+  name: Refresh
+  description: Fetch the latest BOM Space Weather Services data for all configured entries, or one entry when entry_id is supplied.
+  fields:
+    entry_id:
+      name: Entry ID
+      description: Optional Home Assistant config entry ID to refresh a single AUS BOM Space Weather instance.
+      required: false
+      selector:
+        text:

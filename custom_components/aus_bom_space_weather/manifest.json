@@ -1,0 +1,13 @@
+{
+  "domain": "aus_bom_space_weather",
+  "name": "AUS BOM Space Weather",
+  "after_dependencies": ["http"],
+  "codeowners": ["@AshtonAU"],
+  "config_flow": true,
+  "documentation": "https://github.com/AshtonAU/aus-bom-space-weather",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/AshtonAU/aus-bom-space-weather/issues",
+  "requirements": [],
+  "version": "0.1.0"
+}
+

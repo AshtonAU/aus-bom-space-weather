@@ -1,0 +1,55 @@
+name: Bug report
+description: Report a reproducible problem with the integration or Lovelace card.
+title: "[Bug]: "
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include BOM SWS API keys, cookies, private URLs, or unredacted diagnostics.
+  - type: input
+    id: version
+    attributes:
+      label: Integration version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: home_assistant_version
+    attributes:
+      label: Home Assistant version
+      placeholder: "2024.6.0"
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Affected area
+      options:
+        - Config flow / setup
+        - Sensors / binary sensors
+        - Lovelace card
+        - Visual editor
+        - Release package / HACS
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: Describe the problem and what you expected to happen.
+    validations:
+      required: true
+  - type: textarea
+    id: yaml
+    attributes:
+      label: Card YAML
+      description: Paste relevant card YAML with secrets removed.
+      render: yaml
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Paste relevant Home Assistant logs with secrets removed.
+      render: text

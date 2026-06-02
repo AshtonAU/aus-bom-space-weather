@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/AshtonAU/aus-bom-space-weather/discussions
+    about: Ask setup questions, share dashboard screenshots, or suggest ideas.
