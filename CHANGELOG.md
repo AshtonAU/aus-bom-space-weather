@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.1.1 - 2026-06-05
+
+### Polished
+
+- Refined the Lovelace card visual system for cleaner Home Assistant light and dark theme rendering.
+- Softened panel borders, gauge surfaces, metric chips, and alert rows so compact and dashboard layouts feel less boxed-in.
+- Tightened compact glance spacing and gauge sizing for a more balanced mobile-friendly card footprint.
+
 ## 0.1.0 - 2026-06-01
 
 Initial clean-room release candidate for the Australian BOM Space Weather Home Assistant integration and bundled Lovelace card.

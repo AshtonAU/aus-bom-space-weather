@@ -11,7 +11,7 @@ Use it to keep Australian space weather visible in Home Assistant: geomagnetic a
 [![GitHub Sponsors](https://img.shields.io/badge/Sponsor-GitHub%20Sponsors-ea4aaa?logo=githubsponsors&logoColor=white)](https://github.com/sponsors/AshtonAU)
 [![Buy Me a Coffee](https://img.shields.io/badge/Support-Buy%20Me%20a%20Coffee-FFDD00?logo=buymeacoffee&logoColor=000000)](https://buymeacoffee.com/ashtonau)
 
-Current release candidate: **v0.1.0**
+Current release candidate: **v0.1.1**
 
 > [!IMPORTANT]
 > This is a release candidate. Current A/K/Dst data and documented BOM notice shapes are covered; final real-event validation should be repeated during a live BOM aurora or magnetic notice window.
@@ -131,7 +131,7 @@ Requires Home Assistant `2024.6.0` or newer.
 Use this exact resource URL after installing the integration:
 
 ```yaml
-url: /aus_bom_space_weather/aus-bom-space-weather-card.js?v=0.1.0
+url: /aus_bom_space_weather/aus-bom-space-weather-card.js?v=0.1.1
 type: module
 ```
 
@@ -522,7 +522,7 @@ This repository is a clean-room implementation. It uses the official BOM SWS API
 
 ## Troubleshooting
 
-- If the card is not found, confirm the Lovelace resource is `/aus_bom_space_weather/aus-bom-space-weather-card.js?v=0.1.0` with `type: module`.
+- If the card is not found, confirm the Lovelace resource is `/aus_bom_space_weather/aus-bom-space-weather-card.js?v=0.1.1` with `type: module`.
 - If the card still looks old after updating, reload dashboard resources, hard-refresh the browser, or bump the cache-busting `?v=` value.
 - If data is unavailable, check the integration entry in **Settings > Devices & Services**, confirm the BOM SWS API key is accepted, and review the data health/entity diagnostics.
 - If you changed the K-index location, restart or reload the integration entry if Home Assistant has not refreshed the entity names yet.

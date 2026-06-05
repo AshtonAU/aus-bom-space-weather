@@ -5,7 +5,7 @@
  * Home Assistant backend integration.
  */
 
-const CARD_VERSION = '0.1.0';
+const CARD_VERSION = '0.1.1';
 const CARD_TYPE = 'aus-bom-space-weather-card';
 const CARD_CUSTOM_TYPE = `custom:${CARD_TYPE}`;
 const DEFAULT_GAUGES = Object.freeze(['k_index', 'a_index', 'dst_index']);
@@ -4492,12 +4492,17 @@ function styles() {
         --asw-muted: var(--secondary-text-color, #64748b);
         --asw-neutral: var(--asw-muted);
         --asw-surface: var(--ha-card-background, var(--card-background-color, #ffffff));
-        --asw-elevated: color-mix(in srgb, var(--asw-surface) 92%, var(--secondary-background-color, #f1f5f9));
+        --asw-elevated: color-mix(in srgb, var(--asw-surface) 96%, var(--secondary-background-color, #f1f5f9));
         --asw-panel: var(--asw-elevated);
         --asw-soft-panel: var(--secondary-background-color, rgba(148, 163, 184, 0.12));
         --asw-border: var(--divider-color, rgba(148, 163, 184, 0.24));
+        --asw-panel-border: color-mix(in srgb, var(--asw-border) 78%, transparent);
         --asw-card-border: var(--ha-card-border-color, var(--asw-border));
         --asw-card-shadow: var(--ha-card-box-shadow, none);
+        --asw-panel-shadow: none;
+        --asw-radius-card: var(--ha-card-border-radius, 12px);
+        --asw-radius-panel: 10px;
+        --asw-radius-inner: 8px;
       }
 
       ha-card {
@@ -4505,6 +4510,7 @@ function styles() {
         container-type: inline-size;
         overflow: hidden;
         border: 1px solid var(--asw-card-border);
+        border-radius: var(--asw-radius-card);
         background: var(--asw-surface);
         color: var(--asw-text);
         box-shadow: var(--asw-card-shadow);
@@ -4520,11 +4526,12 @@ function styles() {
         --asw-muted: #64748b;
         --asw-neutral: #64748b;
         --asw-surface: #ffffff;
-        --asw-elevated: #f8fbff;
+        --asw-elevated: #f8fafc;
         --asw-panel: var(--asw-elevated);
-        --asw-soft-panel: #edf2f7;
-        --asw-border: #d7dee9;
-        --asw-card-border: #dbe4ef;
+        --asw-soft-panel: #eef3f8;
+        --asw-border: #d8e1eb;
+        --asw-panel-border: #dde6ef;
+        --asw-card-border: #d9e2ec;
         --asw-card-shadow: none;
       }
 
@@ -4537,11 +4544,12 @@ function styles() {
         --asw-muted: #9dafc8;
         --asw-neutral: #9dafc8;
         --asw-surface: #111827;
-        --asw-elevated: #172033;
+        --asw-elevated: #162033;
         --asw-panel: var(--asw-elevated);
         --asw-soft-panel: #0b1220;
-        --asw-border: rgba(148, 163, 184, 0.28);
-        --asw-card-border: rgba(148, 163, 184, 0.22);
+        --asw-border: rgba(148, 163, 184, 0.24);
+        --asw-panel-border: rgba(148, 163, 184, 0.18);
+        --asw-card-border: rgba(148, 163, 184, 0.20);
         --asw-card-shadow: none;
       }
 
@@ -4562,7 +4570,7 @@ function styles() {
         justify-content: space-between;
         align-items: flex-start;
         gap: 12px;
-        padding: 14px 16px 12px;
+        padding: 15px 16px 13px;
         border-bottom: 1px solid var(--asw-border);
         background: var(--asw-surface);
       }
@@ -4603,7 +4611,7 @@ function styles() {
         color: var(--asw-muted);
         font-size: 11px;
         font-weight: 700;
-        letter-spacing: 0;
+        letter-spacing: 0.02em;
         text-transform: uppercase;
       }
 
@@ -4733,7 +4741,7 @@ function styles() {
       .body {
         padding: 12px;
         display: grid;
-        gap: 10px;
+        gap: 11px;
       }
 
       .gauges {
@@ -4762,14 +4770,15 @@ function styles() {
       .stale-panel,
       .diagnostics,
       .alerts {
-        border: 1px solid var(--asw-border);
-        border-radius: 8px;
+        border: 1px solid var(--asw-panel-border);
+        border-radius: var(--asw-radius-panel);
         background: var(--asw-panel);
+        box-shadow: var(--asw-panel-shadow);
       }
 
       .gauge-card {
         --gauge-size: 82px;
-        padding: 10px;
+        padding: 11px;
         min-width: 0;
         cursor: pointer;
         touch-action: manipulation;
@@ -4779,14 +4788,14 @@ function styles() {
         min-width: 0;
         display: grid;
         gap: 7px;
-        padding: 8px;
-        border: 1px solid color-mix(in srgb, var(--tone) 26%, var(--asw-border));
-        border-radius: 8px;
+        padding: 9px;
+        border: 1px solid color-mix(in srgb, var(--tone) 18%, var(--asw-panel-border));
+        border-radius: var(--asw-radius-panel);
         background: var(--asw-panel);
       }
 
       .glance-panel.unavailable {
-        border-color: color-mix(in srgb, var(--asw-neutral) 28%, var(--asw-border));
+        border-color: color-mix(in srgb, var(--asw-neutral) 20%, var(--asw-panel-border));
         background: var(--asw-panel);
       }
 
@@ -4805,7 +4814,7 @@ function styles() {
       .glance-primary:focus-visible,
       .glance-metric:focus-visible,
       .glance-footer-chip:focus-visible {
-        border-radius: 8px;
+        border-radius: var(--asw-radius-inner);
         outline: 2px solid color-mix(in srgb, var(--tone, var(--asw-active)) 48%, transparent);
         outline-offset: 2px;
       }
@@ -4821,10 +4830,10 @@ function styles() {
           "rail rail";
         align-items: center;
         gap: 5px 8px;
-        padding: 7px 8px;
-        border: 1px solid color-mix(in srgb, var(--tone) 32%, var(--asw-border));
-        border-radius: 8px;
-        background: color-mix(in srgb, var(--tone) 3%, var(--asw-elevated));
+        padding: 8px;
+        border: 1px solid color-mix(in srgb, var(--tone) 22%, var(--asw-panel-border));
+        border-radius: var(--asw-radius-inner);
+        background: color-mix(in srgb, var(--tone) 2.5%, var(--asw-elevated));
         cursor: pointer;
         touch-action: manipulation;
       }
@@ -4838,7 +4847,7 @@ function styles() {
         place-items: center;
         background: conic-gradient(
           var(--tone) calc(var(--percent) * 1%),
-          color-mix(in srgb, var(--tone) 8%, transparent) 0
+          color-mix(in srgb, var(--tone) 10%, transparent) 0
         );
       }
 
@@ -4850,7 +4859,7 @@ function styles() {
         place-items: center;
         align-content: center;
         background: var(--asw-surface);
-        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 6%, transparent);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 8%, transparent);
       }
 
       .glance-primary-gauge-inner strong {
@@ -4968,9 +4977,9 @@ function styles() {
       .glance-metric,
       .glance-footer-chip {
         min-width: 0;
-        border: 1px solid color-mix(in srgb, var(--tone) 28%, var(--asw-border));
-        border-radius: 8px;
-        background: color-mix(in srgb, var(--tone) 3%, var(--asw-surface));
+        border: 1px solid color-mix(in srgb, var(--tone) 18%, var(--asw-panel-border));
+        border-radius: var(--asw-radius-inner);
+        background: color-mix(in srgb, var(--tone) 2%, var(--asw-surface));
         cursor: pointer;
         touch-action: manipulation;
       }
@@ -4996,7 +5005,7 @@ function styles() {
         height: 17px;
         color: var(--tone);
         border-radius: 50%;
-        background: color-mix(in srgb, var(--tone) 7%, transparent);
+        background: color-mix(in srgb, var(--tone) 6%, transparent);
         flex: 0 0 auto;
       }
 
@@ -5048,7 +5057,7 @@ function styles() {
         top: -3px;
         left: clamp(0%, var(--marker), 100%);
         width: 4px;
-        height: 14px;
+        height: 13px;
         border-radius: 999px;
         background: var(--asw-text);
         box-shadow: 0 0 0 2px var(--asw-surface);
@@ -5101,9 +5110,9 @@ function styles() {
         gap: 8px;
         min-height: 32px;
         padding: 5px 8px;
-        border: 1px solid color-mix(in srgb, var(--tone) 28%, var(--asw-border));
-        border-radius: 8px;
-        background: color-mix(in srgb, var(--tone) 3%, var(--asw-surface));
+        border: 1px solid color-mix(in srgb, var(--tone) 18%, var(--asw-panel-border));
+        border-radius: var(--asw-radius-inner);
+        background: color-mix(in srgb, var(--tone) 2%, var(--asw-surface));
         color: var(--asw-text);
         font-size: 12px;
         font-weight: 780;
@@ -5184,7 +5193,7 @@ function styles() {
       .glance-primary:hover,
       .glance-metric:hover,
       .glance-footer-chip:hover {
-        border-color: color-mix(in srgb, var(--tone, var(--asw-active)) 36%, var(--asw-border));
+        border-color: color-mix(in srgb, var(--tone, var(--asw-active)) 30%, var(--asw-panel-border));
       }
 
       .gauge-card:focus-visible,
@@ -5216,7 +5225,7 @@ function styles() {
       .gauge-row {
         display: grid;
         grid-template-columns: var(--gauge-size) minmax(0, 1fr);
-        gap: 12px;
+        gap: 13px;
         align-items: center;
         margin-top: 10px;
       }
@@ -5227,22 +5236,24 @@ function styles() {
         border-radius: 50%;
         display: grid;
         place-items: center;
-        background: conic-gradient(var(--tone) calc(var(--percent) * 1%), color-mix(in srgb, var(--tone) 8%, transparent) 0);
+        background: conic-gradient(var(--tone) calc(var(--percent) * 1%), color-mix(in srgb, var(--tone) 10%, transparent) 0);
       }
 
       .gauge-inner {
-        width: calc(var(--gauge-size) - 18px);
+        width: calc(var(--gauge-size) - 16px);
         aspect-ratio: 1;
         border-radius: 50%;
         display: grid;
         place-items: center;
         align-content: center;
         background: var(--asw-surface);
+        box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--tone) 7%, transparent);
       }
 
       .gauge-inner strong {
-        font-size: 24px;
+        font-size: 25px;
         line-height: 1;
+        font-weight: 850;
       }
 
       .gauge-inner span {
@@ -5272,7 +5283,7 @@ function styles() {
         grid-template-columns: minmax(0, 1fr) auto;
         gap: 14px;
         align-items: center;
-        padding: 12px;
+        padding: 13px;
         cursor: pointer;
         touch-action: manipulation;
       }
@@ -5306,7 +5317,7 @@ function styles() {
         min-height: 30px;
         display: grid;
         place-items: center;
-        border-radius: 6px;
+        border-radius: var(--asw-radius-inner);
         background: var(--asw-soft-panel);
         color: var(--asw-muted);
         font-size: 12px;
@@ -5336,7 +5347,7 @@ function styles() {
         column-gap: 7px;
         row-gap: 2px;
         padding: 9px 11px;
-        border-right: 1px solid var(--asw-border);
+        border-right: 1px solid color-mix(in srgb, var(--asw-panel-border) 74%, transparent);
       }
 
       .fact[role="button"] {
@@ -5355,7 +5366,7 @@ function styles() {
         display: grid;
         place-items: center;
         border-radius: 999px;
-        background: color-mix(in srgb, var(--tone) 6%, transparent);
+        background: color-mix(in srgb, var(--tone) 5%, transparent);
         color: var(--tone);
       }
 
@@ -5392,10 +5403,10 @@ function styles() {
         display: inline-flex;
         align-items: center;
         gap: 8px;
-        border: 1px solid color-mix(in srgb, var(--tone) 38%, var(--asw-border));
+        border: 1px solid color-mix(in srgb, var(--tone) 30%, var(--asw-panel-border));
         border-radius: 999px;
         padding: 3px 10px 3px 5px;
-        background: color-mix(in srgb, var(--tone) 4%, var(--asw-surface));
+        background: color-mix(in srgb, var(--tone) 3%, var(--asw-surface));
         color: var(--asw-text);
         font: inherit;
         font-size: 12px;
@@ -5479,8 +5490,8 @@ function styles() {
         gap: clamp(2px, 0.45vw, 4px);
         align-items: end;
         padding: 8px;
-        border-radius: 7px;
-        background: color-mix(in srgb, var(--asw-soft-panel) 70%, transparent);
+        border-radius: var(--asw-radius-inner);
+        background: color-mix(in srgb, var(--asw-soft-panel) 78%, transparent);
       }
 
       .timeline-segment {
@@ -5574,9 +5585,9 @@ function styles() {
 
       .alert-card {
         border-left: 4px solid var(--tone);
-        border-radius: 6px;
+        border-radius: var(--asw-radius-inner);
         padding: 10px 11px;
-        background: color-mix(in srgb, var(--tone) 4%, transparent);
+        background: color-mix(in srgb, var(--tone) 3%, transparent);
         cursor: pointer;
         touch-action: manipulation;
       }
@@ -5908,7 +5919,7 @@ function styles() {
 
       .density-compact .gauge-card {
         --gauge-size: 64px;
-        padding: 8px;
+        padding: 9px;
       }
 
       .density-compact .summary {
@@ -6018,7 +6029,7 @@ function styles() {
       }
 
       .mode-dashboard .body {
-        gap: 9px;
+        gap: 10px;
       }
 
       .mode-dashboard.history-off .gauge-card {
@@ -6028,7 +6039,7 @@ function styles() {
       .mode-glance .header {
         align-items: center;
         gap: 8px;
-        padding: 9px 10px 7px;
+        padding: 10px 11px 8px;
       }
 
       .mode-glance .header-icon {
@@ -6070,7 +6081,7 @@ function styles() {
 
       .mode-glance .body {
         gap: 7px;
-        padding: 8px;
+        padding: 9px;
       }
 
       .mode-glance .gauges {
@@ -6088,7 +6099,7 @@ function styles() {
 
       .mode-glance .gauge-card {
         --gauge-size: 54px;
-        padding: 8px;
+        padding: 9px 8px;
       }
 
       .mode-glance .gauge-top {
@@ -6116,7 +6127,7 @@ function styles() {
       }
 
       .mode-glance .gauge-inner {
-        width: calc(var(--gauge-size) - 14px);
+        width: calc(var(--gauge-size) - 13px);
       }
 
       .mode-glance .gauge-inner strong {
@@ -6149,7 +6160,7 @@ function styles() {
 
       @container (min-width: 360px) {
         .mode-glance .glance-overview {
-          grid-template-columns: minmax(140px, 0.9fr) minmax(0, 1.1fr);
+          grid-template-columns: minmax(146px, 0.94fr) minmax(0, 1.06fr);
           grid-template-areas:
             "primary metrics"
             "scale metrics";
@@ -6186,7 +6197,7 @@ function styles() {
         }
 
         .mode-glance .glance-primary {
-          min-height: 72px;
+          min-height: 74px;
         }
       }
 
@@ -6289,7 +6300,7 @@ function styles() {
 
         .mode-dashboard.history-off .gauge-card {
           --gauge-size: 64px;
-          padding: 10px 8px;
+          padding: 11px 9px;
         }
 
         .tile-card,

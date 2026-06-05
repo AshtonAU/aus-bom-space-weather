@@ -1,6 +1,6 @@
 {
   "name": "aus-bom-space-weather",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Australian Bureau of Meteorology Space Weather integration and Lovelace card for Home Assistant",
   "main": "custom_components/aus_bom_space_weather/www/aus-bom-space-weather-card.js",
   "scripts": {
